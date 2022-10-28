@@ -1,0 +1,36 @@
+:root{
+    --main-color: #E4B7A0;
+    --primary-color: #C38370;
+    --scarlet: #A82810;
+    --orange: #FBAA60;
+}
+
+body{
+    background-color: var(--main-color) !important;
+}
+
+p.Display-2{
+    height: 10vh;
+}
+
+/* #submit{
+    background-color: var(--primary-color);
+    outline: none;
+    box-shadow: none;
+} */
+
+.btn-primary, .btn-primary:hover, .btn-primary:active, .btn-primary:visited {
+    background-color: var(--primary-color) !important;
+    border-color: var(--primary-color) !important;
+}
+
+.btn-primary:focus, .btn-primary:active{
+    outline: 0;
+    box-shadow: none !important;
+  }
+
+.left {
+    float: left;
+    width: 300px;
+    padding: 10px;
+  }

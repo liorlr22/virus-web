@@ -1,0 +1,149 @@
+<html>
+  <head>
+      <!-- jQuery library -->
+      <script src="https://cdn.jsdelivr.net/npm/jquery@3.6.0/dist/jquery.slim.min.js"></script>
+
+      <!-- Popper JS -->
+      <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
+  
+      <!-- Latest compiled JavaScript -->
+      <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/js/bootstrap.bundle.min.js"></script>
+
+    <!-- importing pages -->
+    <link rel="stylesheet" href="css/styles.css" />
+    <script src="code.js"></script>
+
+    <!-- importing external libraries -->
+    <!-- Latest compiled and minified CSS -->
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/css/bootstrap.min.css"
+    />
+
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+
+    <!-- title -->
+    <title>Youtube to Mp3 downloader</title>
+  </head>
+  <body>
+    <!-- title -->
+    <div class="container">
+      <div class="row" style="margin: top 5vh;">
+        <div class="h-100 d-flex align-items-center justify-content-center" style="margin-top: 5vh; margin-left: 4vh;">
+          <p class="" id="title">Youtube to Mp3 downloader</p>
+        </div>
+      </div>
+    </div>
+    <!-- the form -->
+    <form>
+      <div class="form-group row" style="margin-top:10vh">
+        <label class="col-3"></label> 
+        <div class="col-6">
+          <div class="input-group">
+            <div class="input-group-prepend">
+              <div class="input-group-text">
+                <i class="fa fa-link"></i>
+              </div>
+            </div> 
+            <input id="urlPlaceHolder" name="text" placeholder="" type="text" required="required" class="form-control">
+          </div>
+        </div>
+      </div> 
+      <div class="form-group row">
+        <div class="offset-3 col-6">
+          <button name="submit" type="submit" class="btn btn-primary" id="submit" style="width: 101vh;">Search</button>
+        </div>
+      </div>
+      </form>
+    <div class="d-flex justify-content-center" style="margin-top: 3vh">
+      <div class="card text-center mb-3" style="width: 101vh;">
+        <div class="card-body">
+          <h5 class="card-title" style="text-transform: capitalize;">the video selected: </h5>
+          <div style="display:inline-block;">
+            <div class="left">
+              <img src="https://picsum.photos/250"></img>
+            </div>
+            <div >
+              <p class="card-text">Imagine Dragons - Natural</p>
+            </div>
+            <a href="#" style="margin-top: 3vh" class="btn btn-primary">Download</a>
+        </div>
+          
+          
+        </div>
+      </div>
+      </div>
+    <!-- changing the class of the title based on the screen size -->
+    <script>
+      const links = ["https://www.youtube.com/watch?v=dQw4w9WgXcQ&ab_channel=RickAstley",
+                      "https://www.youtube.com/watch?v=ZHwVBirqD2s&ab_channel=EltonJohnVEVO",
+                      "https://www.youtube.com/watch?v=SQCSxqScSVQ&ab_channel=CoolioVEVO",
+                      "https://www.youtube.com/watch?v=7j7twuejxvU&ab_channel=ImagineDragonsVEVO",
+                      "https://www.youtube.com/watch?v=w5tWYmIOWGk&ab_channel=ImagineDragonsVEVO",
+                      "https://www.youtube.com/watch?v=dvgZkm1xWPE&ab_channel=Coldplay",
+                      "https://www.youtube.com/watch?v=PIh2xe4jnpk&ab_channel=ournameismagicVEVO",
+                      "https://www.youtube.com/watch?v=KRaWnd3LJfs&ab_channel=Maroon5VEVO",
+                      "https://www.youtube.com/watch?v=qpgTC9MDx1o&ab_channel=Maroon5VEVO",
+                      "https://www.youtube.com/watch?v=hT_nvWreIhg&ab_channel=OneRepublicVEVO"];
+
+
+      let urlPlaceHolder = document.getElementById("urlPlaceHolder");
+      let randomNumber = Math.floor(Math.random() * 10);
+      urlPlaceHolder.placeholder = links[randomNumber];
+      $(document).ready(function(){
+        w_w = $(window).width();
+        if(w_w >= 1920){
+            $("#title").addClass('Display-2');
+            $("#title").removeClass('Display-1');
+            $("#title").removeClass('Display-3');
+            $("#title").removeClass('Display-4');
+        }
+        //onResize
+        $(window).resize(function(){
+        w_w = $(window).width();
+        // if(w_w < 1920 && w_w > 980){
+        //   $("#title").addClass('Display-4');
+        //   $("#submit").css('width', '50vh');
+        //   alert(w_w);
+        // } else if(w_w <= 980) {
+        //   $("#title").addClass('Display-4');
+        //   // $("#title").css("display", "inline");
+        //   $("#submit").css('width', '44vh');
+        //   alert(w_w);
+        // } else {
+        //   $("#title").removeClass('Display-4');
+        //   $("#title").addClass('Display-2');
+        //   $("#submit").css('width', '101vh');
+        //   alert(w_w);
+        // }
+        if(w_w >= 3840){
+          $("#title").addClass('Display-1');
+          $("#title").removeClass('Display-2');
+          $("#title").removeClass('Display-3');
+          $("#title").removeClass('Display-4');
+        } else if(w_w < 3840 && w_w >= 1920){
+          $("#title").addClass('Display-2');
+          $("#title").removeClass('Display-1');
+          $("#title").removeClass('Display-3');
+          $("#title").removeClass('Display-4');
+        } else if(w_w < 1920 && w_w >= 768){
+          $("#title").addClass('Display-3');
+          $("#title").removeClass('Display-1');
+          $("#title").removeClass('Display-2');
+          $("#title").removeClass('Display-4');
+        } else {
+          $("#title").addClass('Display-4');
+          $("#title").removeClass('Display-1');
+          $("#title").removeClass('Display-2');
+          $("#title").removeClass('Display-3');
+        }
+        });
+        
+      });
+
+    </script>
+  </body>
+</html>
