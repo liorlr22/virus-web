@@ -13,6 +13,8 @@
     <link rel="stylesheet" href="css/styles.css" />
     <script src="code.js"></script>
 
+    <link rel="icon" href="resources/arrow-circle-down.svg">
+
     <!-- importing external libraries -->
     <!-- Latest compiled and minified CSS -->
     <link
@@ -20,7 +22,7 @@
       href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/css/bootstrap.min.css"
     />
 
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" id="favicon" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
 
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
@@ -32,8 +34,8 @@
     <!-- title -->
     <div class="container">
       <div class="row" style="margin: top 5vh;">
-        <div class="h-100 d-flex align-items-center justify-content-center" style="margin-top: 5vh; margin-left: 4vh;">
-          <p class="" id="title">Youtube to Mp3 downloader</p>
+        <div class="h-100 d-flex align-items-center justify-content-center" style="margin-top: 5vh; width: 100%;">
+          <p class="" id="title" style="text-align: center;">Youtube to Mp3 downloader</p>
         </div>
       </div>
     </div>
@@ -54,30 +56,35 @@
       </div> 
       <div class="form-group row">
         <div class="offset-3 col-6">
-          <button name="submit" type="submit" class="btn btn-primary" id="submit" style="width: 101vh;">Search</button>
+          <button name="submit" type="submit" class="btn btn-primary" id="submit" style="width: 100%; height: 100%;">Submit</button>
         </div>
       </div>
       </form>
-    <div class="d-flex justify-content-center" style="margin-top: 3vh">
-      <div class="card text-center mb-3" style="width: 101vh;">
-        <div class="card-body">
+    <div class="d-flex justify-content-center" id="result" style="margin-top: 3vh;">
+      <div class="card text-center mb-3" style="width: 49%;">
+        <div class="card-body" style="width: 100%;">
           <h5 class="card-title" style="text-transform: capitalize;">the video selected: </h5>
           <div style="display:inline-block;">
             <div class="left">
-              <img src="https://picsum.photos/250"></img>
+              <img src="https://picsum.photos/250" style="border-radius: 5px;"></img>
             </div>
             <div >
-              <p class="card-text">Imagine Dragons - Natural</p>
+              <p class="card-text" style="width: 100%;">Imagine Dragons - Natural</p>
             </div>
-            <a href="#" style="margin-top: 3vh" class="btn btn-primary">Download</a>
+            <a href="#" style="width:93%; margin-top:15px" class="btn btn-primary">Download</a>
         </div>
-          
-          
         </div>
       </div>
-      </div>
+    </div>
     <!-- changing the class of the title based on the screen size -->
     <script>
+      // let favicon = document.getElementById('favicon');
+      if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) {
+        document.querySelector('link[rel=icon]').href = 'resources/icon-dark.png'
+      }
+      if (window.matchMedia && window.matchMedia('(prefers-color-scheme: light)').matches) {
+        document.querySelector('link[rel=icon]').href = 'resources/icon-light.svg'
+      }      
       const links = ["https://www.youtube.com/watch?v=dQw4w9WgXcQ&ab_channel=RickAstley",
                       "https://www.youtube.com/watch?v=ZHwVBirqD2s&ab_channel=EltonJohnVEVO",
                       "https://www.youtube.com/watch?v=SQCSxqScSVQ&ab_channel=CoolioVEVO",

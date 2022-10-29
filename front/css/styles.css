@@ -13,12 +13,6 @@ p.Display-2{
     height: 10vh;
 }
 
-/* #submit{
-    background-color: var(--primary-color);
-    outline: none;
-    box-shadow: none;
-} */
-
 .btn-primary, .btn-primary:hover, .btn-primary:active, .btn-primary:visited {
     background-color: var(--primary-color) !important;
     border-color: var(--primary-color) !important;
@@ -34,3 +28,7 @@ p.Display-2{
     width: 300px;
     padding: 10px;
   }
+
+#result{
+    max-width: 100%;
+}
