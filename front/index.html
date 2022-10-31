@@ -34,14 +34,14 @@
     <!-- title -->
     <div class="container">
       <div class="row" style="margin: top 5vh;">
-        <div class="h-100 d-flex align-items-center justify-content-center" style="margin-top: 5vh; width: 100%;">
-          <p class="" id="title" style="text-align: center;">Youtube to Mp3 downloader</p>
+        <div class="h-100 d-flex align-items-center justify-content-center" style="width: 100%; height: 100%; margin-top: 20px;">
+          <p class="Display-3" id="title" style="text-align: center;">Youtube to Mp3 downloader</p>
         </div>
       </div>
     </div>
     <!-- the form -->
-    <form>
-      <div class="form-group row" style="margin-top:10vh">
+    <form style="width: 100%;">
+      <div class="form-group row" style="margin-top:8vh;">
         <label class="col-3"></label> 
         <div class="col-6">
           <div class="input-group">
@@ -55,23 +55,24 @@
         </div>
       </div> 
       <div class="form-group row">
-        <div class="offset-3 col-6">
+        <label class="col-3"></label> 
+        <div class="col-6">
           <button name="submit" type="submit" class="btn btn-primary" id="submit" style="width: 100%; height: 100%;">Submit</button>
         </div>
       </div>
       </form>
     <div class="d-flex justify-content-center" id="result" style="margin-top: 3vh;">
-      <div class="card text-center mb-3" style="width: 49%;">
-        <div class="card-body" style="width: 100%;">
+      <div class="card text-center mb-3" style="width: 49%; height: 100%;">
+        <div class="card-body" style="width: 100%; height: 100%;">
           <h5 class="card-title" style="text-transform: capitalize;">the video selected: </h5>
           <div style="display:inline-block;">
             <div class="left">
               <img src="https://picsum.photos/250" style="border-radius: 5px;"></img>
             </div>
             <div >
-              <p class="card-text" style="width: 100%;">Imagine Dragons - Natural</p>
+              <p class="card-text" style="width: 100%; height: 100%;">Imagine Dragons - Natural</p>
             </div>
-            <a href="#" style="width:93%; margin-top:15px" class="btn btn-primary">Download</a>
+            <a href="#" style="width:93%; height: 100%; margin-top:15px" class="btn btn-primary">Download</a>
         </div>
         </div>
       </div>
@@ -102,6 +103,7 @@
       urlPlaceHolder.placeholder = links[randomNumber];
       $(document).ready(function(){
         w_w = $(window).width();
+        // alert(w_w)
         if(w_w >= 1920){
             $("#title").addClass('Display-2');
             $("#title").removeClass('Display-1');

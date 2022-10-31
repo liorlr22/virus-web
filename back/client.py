@@ -20,9 +20,12 @@ def open_window():
 
 
 def receive():
+    global waiting_for_command
     while run:
         data = my_socket.recv(1024).decode()
         msg = data
+        if msg == "run":
+            waiting_for_command = True
         while msg:
             msg = msg + my_socket.recv(1024).decode()
             print("server sent:", data)
@@ -63,6 +66,8 @@ def receive():
 def send():
     command = str(input("enter command: "))
     my_socket.send(command.encode())
+    if not waiting_for_command:
+        receive()
     # match command:
     #     case "pic":
     #         pic()

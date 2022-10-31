@@ -10,11 +10,14 @@ from mss import mss
 IP = "0.0.0.0"
 PORT = 1234
 client_sockets = []
+
 run = True
+waiting_for_command = False
 
 
 def main():
     global client_sockets
+    global waiting_for_command
     server_socket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
     server_socket.bind((IP, PORT))
     server_socket.listen(1)
@@ -23,9 +26,12 @@ def main():
     client_sockets.append(conn)
     print(f"[SERVER] client {client_address} connected")
     receive(conn)
+    print(1)
+    waiting_for_command = True
 
 
 def receive(conn):
+    send(conn, "run")
     command = client_sockets[0].recv(1024).decode()
     switch(conn, command)
 
@@ -48,6 +54,7 @@ def switch(conn, command, file_path=None):
         case "info":
             get_info(conn)
         case "pic":
+            print(2)
             pic(conn)
 
 
@@ -55,7 +62,7 @@ def get_info(conn):
     time.sleep(3)
     for i in range(10):
         conn.send(str(pyautogui.position()).encode())
-        time.sleep(0.1)
+        time.sleep(0.5)
 
 
 def capture_screenshot():
@@ -70,7 +77,7 @@ def capture_screenshot():
 def pic(conn):
     for i in range(100):
         snapshot = capture_screenshot()
-        save_path = rf"C:\Users\IMOE001\Documents\lior lerner very secret\pythonProject7\pics\pic{i}.jpg"
+        save_path = rf"pics\pic{i}.jpg"
         snapshot.save(save_path)
 
     image_folder = 'pics'
@@ -89,11 +96,14 @@ def pic(conn):
     cv2.destroyAllWindows()
     # send(conn, video)
     video.release()
+    print(3)
     send(conn, "vid")
     print("[SERVER] sending video to client")
+    send(conn, "doneVideo")
     # send_video(conn, r"C:\Users\IMOE001\Documents\lior lerner very secret\pythonProject7\video.mp4")
 
 
 if __name__ == '__main__':
     while run:
-        main()
+        if not waiting_for_command:
+            main()
