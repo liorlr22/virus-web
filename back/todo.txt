@@ -1,0 +1,3 @@
+fix while in server
+fix sending the video (including converting to mp4 format)
+send error in case of an unknown command
