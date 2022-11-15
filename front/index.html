@@ -40,7 +40,7 @@
       </div>
     </div>
     <!-- the form -->
-    <form style="width: 100%;" onsubmit="toggleAnswer()" id="linkReceive">
+    <form style="width: 100%;" onsubmit="toggleAnswer(document.getElementById('urlPlaceHolder').value)" id="linkReceive">
       <div class="form-group row" style="margin-top:8vh;">
         <label class="col-3"></label> 
         <div class="col-6">
@@ -160,23 +160,29 @@
         e.preventDefault();
       });
 
-      function toggleAnswer() {
+      function toggleAnswer(link) {
         
         // alert(x);
         // document.getElementById("tnpic").innerHTML = x;
 
         var target = document.getElementById("target");
         if (target.style.display === "none") {
+          var pic = document.getElementById("tnpic");
+          console.log(pic);
+          link = link.split("=");
+          link = link[1];
+          pic.src="https://img.youtube.com/vi/" + link + "/0.jpg";
+          pic.style.height="75%";
+          pic.style.width="75%";
           target.style.display = "block";
         } else {
-        target.style.display = "none";
+          
         }
         
-        var x = document.getElementById("myText").value;
-        alert(x);
-        console.log(x);
+       
       }
 
     </script>
+    <script type="module" src="getway.js"></script>
   </body>
 </html>

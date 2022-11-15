@@ -1,0 +1,15 @@
+{
+  "dependencies": {
+    "get-youtube-title": "^1.0.1"
+  },
+  "name": "final-project",
+  "version": "1.0.0",
+  "description": "my final project for computers class",
+  "main": "code.js",
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "lior lerner",
+  "license": "ISC"
+}
