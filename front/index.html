@@ -11,8 +11,6 @@
 
     <!-- importing pages -->
     <link rel="stylesheet" href="css/styles.css" />
-    <script src="code.js"></script>
-
     <link rel="icon" href="resources/arrow-circle-down.svg">
 
     <!-- importing external libraries -->
@@ -167,23 +165,33 @@
         var target = document.getElementById("target");
         if (target.style.display === "none") {
           var pic = document.getElementById("tnpic");
-          console.log(pic);
           link = link.split("=");
-          link = link[1];
+          if (link.length == 2){
+            link = link[1];
+          } else {
+            link = link[1];
+            link = link.split('&');
+            link = link[0];
+          }
           pic.src="https://img.youtube.com/vi/" + link + "/0.jpg";
+          var obj = "https://www.googleapis.com/youtube/v3/videos?id=" + link + "&key=AIzaSyAcwblTx35lcf6pF9ZtB5ptLSGvTGwIXp4&fields=items(snippet(title))&part=snippet";
+          var temp = JSON.parse(obj);
+          alert(temp);
+          // {"items": [{"snippet": {"title": "Arctic Monkeys - Do I Wanna Know? (Official Video)"}}]}
+};
+        } 
           pic.style.height="75%";
           pic.style.width="75%";
           target.style.display = "block";
-        } 
+          
+        
         // else {
           
         // }
-        
-       
-      }
+
 
     </script>
     
   </body>
-  <script type="module" src="code.js"></script>
+  <script src="code.js"></script>
 </html>
