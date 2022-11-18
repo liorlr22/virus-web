@@ -32,3 +32,12 @@ p.Display-2{
 #result{
     max-width: 100%;
 }
+
+#slideSource {
+    opacity: 1;
+    transition: opacity 1s; 
+  }
+  
+  #slideSource.fade {
+    opacity: 0;
+  }

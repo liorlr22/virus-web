@@ -38,7 +38,7 @@
       </div>
     </div>
     <!-- the form -->
-    <form style="width: 100%;" onsubmit="toggleAnswer(document.getElementById('urlPlaceHolder').value)" id="linkReceive">
+    <form name="submitUrl" style="width: 100%;" onsubmit="toggleAnswer(document.getElementById('urlPlaceHolder').value)" id="linkReceive">
       <div class="form-group row" style="margin-top:8vh;">
         <label class="col-3"></label> 
         <div class="col-6">
@@ -58,25 +58,26 @@
           <button name="submit" type="submit" class="btn btn-primary" id="submit" style="width: 100%; height: 100%;">Submit</button>
         </div>
       </div>
-      </form>
+    </form>
 
     <!-- the result -->
     <div id="target" style="display: none;">
-    <div class="d-flex justify-content-center" id="result" style="margin-top: 3vh;">
-      <div class="card text-center mb-3" style="width: 49%; height: 100%;">
-        <div class="card-body" style="width: 100%; height: 100%;">
-          <h5 class="card-title" style="text-transform: capitalize;">the video selected: </h5>
-          <div style="display:inline-block;">
-            <div class="left">
-              <img id="tnpic" src="https://picsum.photos/250" style="border-radius: 5px;">
-            <div>
-              <p class="card-text" style="width: 100%; height: 100%;  margin-top:15px">Imagine dragons - Natural</p>
-            </div>
-            <a href="#" style="width:93%; height: 100%; margin-top:15px" class="btn btn-primary">Download</a>
-        </div>
+      <div class="d-flex justify-content-center" id="result" style="margin-top: 3vh;">
+        <div class="card text-center mb-3" style="width: 49%; height: 100%;">
+          <div class="card-body" style="width: 100%; height: 100%;">
+            <h5 class="card-title" style="text-transform: capitalize;">the video selected: </h5>
+            <div style="display:inline-block;">
+              <div class="left">
+                <img id="tnpic" src="https://picsum.photos/250" alt="result picture" style="border-radius: 5px;">
+              <div>
+                <p id="videoTitle" class="card-text" style="width: 100%; height: 100%;  margin-top:15px">Imagine dragons - Natural</p>
+              </div>
+              <a download="resources/icon-dark.png" href="#" style="width:93%; height: 100%; margin-top:15px" class="btn btn-primary">Download</a>
+          </div>
+          </div>
         </div>
       </div>
-    </div></div>
+    </div>
     <!-- changing the class of the title based on the screen size -->
     <script>
       // let favicon = document.getElementById('favicon');
@@ -156,42 +157,45 @@
       $("#linkReceive").submit(function(e) {
         e.preventDefault();
       });
-
+      var target = document.getElementById("target");
+      var frm = document.getElementsByName("submitUrl")[0];
       function toggleAnswer(link) {
-        
-        // alert(x);
-        // document.getElementById("tnpic").innerHTML = x;
+        if (link != ""){
+          if (target.style.display === "none") {
+            console.log("in");
+            var pic = document.getElementById("tnpic");
+            if (link.indexOf('=') > -1){
+              link = link.split("=");
+              if (link.length == 2){
+                link = link[1];
+              } else {
+                link = link[1];
+                link = link.split('&');
+                link = link[0];
+              }
+            } else {
+              link = link.split('/');
+              link = link[link.length - 1];
+            }
+            pic.src="https://img.youtube.com/vi/" + link + "/0.jpg";
+            var obj = "https://www.googleapis.com/youtube/v3/videos?id=" + link + "&key=AIzaSyAcwblTx35lcf6pF9ZtB5ptLSGvTGwIXp4&fields=items(snippet(title))&part=snippet";
+            console.log(obj);
+            const getJSON = async obj => {
+              const response = await fetch(obj);
+              return response.json(); // get JSON from the response 
+            }
+            getJSON(obj).then(data => data.items[0].snippet.title).then(title => {document.getElementById("videoTitle").innerHTML = title} );
 
-        var target = document.getElementById("target");
-        if (target.style.display === "none") {
-          var pic = document.getElementById("tnpic");
-          link = link.split("=");
-          if (link.length == 2){
-            link = link[1];
-          } else {
-            link = link[1];
-            link = link.split('&');
-            link = link[0];
+            pic.style.height="75%";
+            pic.style.width="75%";
+            target.style.display = "block";
+            frm.reset();
+          } 
+        } else {
+            console.log("out");
+            target.style.display = "none";
           }
-          pic.src="https://img.youtube.com/vi/" + link + "/0.jpg";
-          var obj = "https://www.googleapis.com/youtube/v3/videos?id=" + link + "&key=AIzaSyAcwblTx35lcf6pF9ZtB5ptLSGvTGwIXp4&fields=items(snippet(title))&part=snippet";
-          var temp = JSON.parse(obj);
-          alert(temp);
-          // {"items": [{"snippet": {"title": "Arctic Monkeys - Do I Wanna Know? (Official Video)"}}]}
-};
-        } 
-          pic.style.height="75%";
-          pic.style.width="75%";
-          target.style.display = "block";
-          
-        
-        // else {
-          
-        // }
-
-
-    </script>
-    
+      }
+  </script>
   </body>
-  <script src="code.js"></script>
 </html>
