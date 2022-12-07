@@ -59,7 +59,7 @@
         </div>
       </div>
     </form>
-
+    <a href="#" download="myimage"><img src="https://picsum.photos/250" /></a>
     <!-- the result -->
     <div id="target" style="display: none;">
       <div class="d-flex justify-content-center" id="result" style="margin-top: 3vh;">
@@ -72,7 +72,7 @@
               <div>
                 <p id="videoTitle" class="card-text" style="width: 100%; height: 100%;  margin-top:15px">Imagine dragons - Natural</p>
               </div>
-              <a download="resources/icon-dark.png" href="#" style="width:93%; height: 100%; margin-top:15px" class="btn btn-primary">Download</a>
+              <a id="dnldBtn" href="#" download="title" style="width:93%; height: 100%; margin-top:15px" class="btn btn-primary" >Download</a>
           </div>
           </div>
         </div>
@@ -159,6 +159,7 @@
       });
       var target = document.getElementById("target");
       var frm = document.getElementsByName("submitUrl")[0];
+      var dnld = document.getElementById("dnldBtn");
       function toggleAnswer(link) {
         if (link != ""){
           if (target.style.display === "none") {
@@ -177,14 +178,16 @@
               link = link.split('/');
               link = link[link.length - 1];
             }
-            pic.src="https://img.youtube.com/vi/" + link + "/0.jpg";
+            let src = "https://img.youtube.com/vi/" + link + "/0.jpg";
+            pic.src= src;
+            dnld.href = src;
             var obj = "https://www.googleapis.com/youtube/v3/videos?id=" + link + "&key=AIzaSyAcwblTx35lcf6pF9ZtB5ptLSGvTGwIXp4&fields=items(snippet(title))&part=snippet";
             console.log(obj);
             const getJSON = async obj => {
               const response = await fetch(obj);
               return response.json(); // get JSON from the response 
             }
-            getJSON(obj).then(data => data.items[0].snippet.title).then(title => {document.getElementById("videoTitle").innerHTML = title} );
+            getJSON(obj).then(data => data.items[0].snippet.title).then(title => {document.getElementById("videoTitle").innerHTML = title} ).then(fileName => {dnld.download=fileName});
 
             pic.style.height="75%";
             pic.style.width="75%";
