@@ -59,7 +59,7 @@
         </div>
       </div>
     </form>
-    <a href="#" download="myimage"><img src="https://picsum.photos/250" /></a>
+    <!-- <a href="#" download="myimage"><img src="https://picsum.photos/250" /></a> -->
     <!-- the result -->
     <div id="target" style="display: none;">
       <div class="d-flex justify-content-center" id="result" style="margin-top: 3vh;">
@@ -72,7 +72,8 @@
               <div>
                 <p id="videoTitle" class="card-text" style="width: 100%; height: 100%;  margin-top:15px">Imagine dragons - Natural</p>
               </div>
-              <a id="dnldBtn" href="#" download="title" style="width:93%; height: 100%; margin-top:15px" class="btn btn-primary" >Download</a>
+              <form name="submitUrl" style="width: 100%; margin-top: 15px;" onsubmit="dnld(document.getElementById('dnldBtn').value)" id="downloadButton">
+              <button id="dnldBtn" style="width:93%; height: 100%" class="btn btn-primary" type="submit">Download</button></form>
           </div>
           </div>
         </div>
@@ -159,7 +160,7 @@
       });
       var target = document.getElementById("target");
       var frm = document.getElementsByName("submitUrl")[0];
-      var dnld = document.getElementById("dnldBtn");
+      var dnldVar = document.getElementById("dnldBtn");
       function toggleAnswer(link) {
         if (link != ""){
           if (target.style.display === "none") {
@@ -179,15 +180,16 @@
               link = link[link.length - 1];
             }
             let src = "https://img.youtube.com/vi/" + link + "/0.jpg";
+            localStorage.setItem('thumbnail', `${src}`);
             pic.src= src;
-            dnld.href = src;
             var obj = "https://www.googleapis.com/youtube/v3/videos?id=" + link + "&key=AIzaSyAcwblTx35lcf6pF9ZtB5ptLSGvTGwIXp4&fields=items(snippet(title))&part=snippet";
             console.log(obj);
             const getJSON = async obj => {
               const response = await fetch(obj);
               return response.json(); // get JSON from the response 
             }
-            getJSON(obj).then(data => data.items[0].snippet.title).then(title => {document.getElementById("videoTitle").innerHTML = title} ).then(fileName => {dnld.download=fileName});
+            getJSON(obj).then(data => data.items[0].snippet.title).then(title => {document.getElementById("videoTitle").innerHTML = title,
+                                                                                  localStorage.setItem('title', `${title}`)});
 
             pic.style.height="75%";
             pic.style.width="75%";
@@ -198,6 +200,19 @@
             console.log("out");
             target.style.display = "none";
           }
+      }
+      function dnld(btn){
+        let link = localStorage.getItem('thumbnail');
+        // link = link.slice(8);
+        window.open(link, '_blank');
+        // link = "/" + link;
+        let title = localStorage.getItem('title') + ".png";
+        var a = document.createElement('a');
+        a.href = link;
+        a.download = title;
+        document.body.appendChild(a);
+        a.click();
+        document.body.removeChild(a);
       }
   </script>
   </body>
