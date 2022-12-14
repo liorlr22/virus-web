@@ -43,9 +43,6 @@ p.Display-2{
 }
 
 @media screen and (min-width: 1000px) {
-  
-
-
   .typewriter {
     overflow: hidden; /* Ensures the content is not revealed until the animation */
     border-right: .15em solid orange; /* The typwriter cursor */
@@ -53,8 +50,8 @@ p.Display-2{
     margin: 0 auto; /* Gives that scrolling effect as the typing happens */
     letter-spacing: .15em; /* Adjust as needed */
     animation: 
-      typing 3.5s steps(40, end),
-      blink-caret .75s step-end infinite;
+      typing 4.5s steps(40, end),
+      blink-caret 1.75s step-end infinite;
   }
 
   /* The typing effect */
